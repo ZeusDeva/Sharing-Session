@@ -4,6 +4,7 @@ import Router from "next/router";
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { AiOutlineLogout } from "react-icons/ai";
+import { signOut } from "next-auth/client";
 
 // utils
 import AuthStorage from "src/utils/auth-storage";
@@ -41,7 +42,9 @@ const AvatarDropDown = ({ style }) => {
     setVisible(false);
     AuthStorage.destroy();
     IdStorage.destroy();
-    Router.push("/");
+    signOut({
+      callbackUrl: "/",
+    });
   };
 
   const menu = (

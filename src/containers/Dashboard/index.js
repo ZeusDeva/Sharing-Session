@@ -1,14 +1,51 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useSession } from "next-auth/client";
+
 import Head from "next/head";
 // Style
 import classes from "./style.module.less";
+
+import jwt_decode from 'jwt-decode'
 
 const propTypes = {};
 
 const defaultProps = {};
 
 const Index = ({}) => {
+  const [session, loadingSession] = useSession();
+
+  useEffect(()=>{
+    if(session){
+      const token = session.jwt
+      const decodedToken = jwt_decode(token);
+      const iat = decodedToken.iat 
+      const maxAge = 60;
+
+      const expTime = (iat + maxAge) * 1000;
+      const currentTime = Date.now();
+      const timeUntilExpiration = expTime - currentTime; 
+
+      const expDate = new Date((iat + maxAge) * 1000);
+      console.log("Token kadaluwarsa pada: ", expDate.toLocaleString());
+      console.log("Waktu tersisa", timeUntilExpiration);
+      console.log("Decode: ",decodedToken);
+
+      if (timeUntilExpiration > 0) {
+        setTimeout(()=>{
+          const newCurrentTime = Date.now() / 1000;
+
+          if ((iat + maxAge) < newCurrentTime) {
+            console.log("Token telah kedaluwarsa.");
+          } else {
+            console.log("Token masih valid.");
+          }
+        }, timeUntilExpiration)
+      } else {
+        console.log("Tidak ada waktu yang tersisa")
+      }
+    }
+  },[session])
   return (
     <div className={classes.container}>
       <Head>
