@@ -1,5 +1,4 @@
-import { BackTop, Layout } from "antd";
-import Image from "next/image";
+import { BackTop, Layout, Image } from "antd";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
@@ -62,12 +61,7 @@ const MainLayout = (props) => {
               <Link href="/">
                 <a>
                   <div className={classes.logo}>
-                    <Image
-                      src="/images/logo.png"
-                      alt="Logo"
-                      width={80}
-                      height={40}
-                    />
+                    <Image src={'/svg/muf_logo.svg'} preview={false}/>
                   </div>
                 </a>
               </Link>
@@ -77,13 +71,6 @@ const MainLayout = (props) => {
                   <AvatarDropDown />
                 </div>
               )}
-              {/* <Switch 
-              checkedChildren='Dark'
-              unCheckedChildren='Light'
-              onChange={toggleDarkMode}
-              checked={darkMode}
-              className="classes.darkModeToggle"
-              /> */}
             </Header>
           </>
         )}
