@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import Login from "../Login";
 import Dashboard from "../Dashboard";
 import { useSession } from "next-auth/client";
+import ExampleTab from "../ExampleTab";
 
 export default function Home() {
 
