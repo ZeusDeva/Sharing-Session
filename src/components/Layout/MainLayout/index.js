@@ -16,6 +16,7 @@ import ArrowLeftIcon from "public/svg/arrow-left.svg";
 // style
 import classes from "./style.module.less";
 import { useEffect, useState } from "react";
+import Sidebar from "../Sidebar";
 
 // Data
 const { Content } = Layout;
@@ -73,6 +74,11 @@ const MainLayout = (props) => {
               )}
             </Header>
           </>
+        )}
+        {AuthStorage.loggedIn && (
+            <>
+              <Sidebar/>
+            </>
         )}
         <Content className={token ? classes.contentoken : classes.content}>
           {children}
