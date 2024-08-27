@@ -1,5 +1,5 @@
 import InputCurrency from "src/components/Input/Currency";
-import styles from "../../../styles/Home.module.css";
+import styles from "../../../styles/Home.module.less";
 import { Col, Form, Input, Row} from "antd";
 
 export default function InputTab() {

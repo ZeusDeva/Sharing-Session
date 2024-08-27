@@ -1,5 +1,5 @@
 import Table from "src/components/Table";
-import styles from "../../../styles/Home.module.css";
+import styles from "../../../styles/Home.module.less";
 import { Col, Form, Row, Button, Modal } from "antd";
 import { useState } from "react";
 

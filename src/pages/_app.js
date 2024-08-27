@@ -1,11 +1,9 @@
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Spin } from "antd";
 import Head from "next/head";
-import { useRouter } from "next/router";
 
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import cookie from "react-cookies";
-import { useAsync } from "react-use";
 
 // components
 import MainLayout from "../components/Layout/MainLayout";
@@ -16,33 +14,57 @@ import { validateMessages } from "../constants/validateMessages";
 import wrapperStore from "../redux";
 // utils
 import AuthStorage from "../utils/auth-storage";
+import { useRouter } from "next/router";
+
+// Style
+import classes from "./style.module.less";
 
 require("../styles/index.less");
 
 const MyApp = (props) => {
-  const router = useRouter();
-  const { token } = router?.query || {};
   const { Component, pageProps } = props;
-  const [awaitLoading, setAwaitLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const Layout = Component.Layout || MainLayout;
 
-  useAsync(async () => {
-    setAwaitLoading(false);
-  }, []);
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleStart = () => setLoading(true);
+    const handleComplete = () => setLoading(false);
+    const handleError = () => setLoading(false);
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', handleError);
+
+    // Cleanup event listeners on unmount
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', handleError);
+    };
+  }, [router]);
 
   return (
-    <Layout>
-      <Head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, shrink-to-fit=no, height=device-height, user-scalable=0"
-        />
-      </Head>
-      <ConfigProvider form={{ validateMessages }}>
-        <Component {...pageProps} router={router} />
-      </ConfigProvider>
-      <Loading fullScreen loading={awaitLoading} />
-    </Layout>
+    <>
+    {loading ? (
+      <div className={classes.spinneroverlay}>
+					<Spin size="large"></Spin>
+			</div>
+      ) : (
+        <Layout>
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, shrink-to-fit=no, height=device-height, user-scalable=0"
+          />
+        </Head>
+        <ConfigProvider form={{ validateMessages }}>
+          <Component {...pageProps}/>
+        </ConfigProvider>
+      </Layout>
+    )}
+    </>
   );
 };
 

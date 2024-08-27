@@ -1,8 +1,10 @@
-import styles from "../../../styles/Home.module.css";
+import styles from "../../../styles/Home.module.less";
 import { Col, DatePicker, Form, Row } from "antd";
+
 
 export default function DateTab() {
     const {RangePicker} = DatePicker
+
 
     return(
         <div className={styles.container}>

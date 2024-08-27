@@ -31,9 +31,7 @@ const defaultProps = {
 
 const MainLayout = (props) => {
   const { children } = props;
-  const { query, asPath } = useRouter();
-  const [, token, params] = asPath.split("/");
-
+  
   // const [darkMode, setDarkMode] = useState(false);
 
   // useEffect(() => {
@@ -56,9 +54,7 @@ const MainLayout = (props) => {
         }}
         // className={`${classes.root} ${darkMode ? 'dark-mode' : ''}`}
       >
-        {!token && (
-          <>
-            <Header>
+      <Header>
               <Link href="/">
                 <a>
                   <div className={classes.logo}>
@@ -72,15 +68,13 @@ const MainLayout = (props) => {
                   <AvatarDropDown />
                 </div>
               )}
-            </Header>
-          </>
-        )}
+        </Header>
         {AuthStorage.loggedIn && (
             <>
               <Sidebar/>
             </>
         )}
-        <Content className={token ? classes.contentoken : classes.content}>
+        <Content className={classes.content}>
           {children}
         </Content>
       </Layout>

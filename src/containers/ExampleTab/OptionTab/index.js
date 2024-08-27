@@ -1,4 +1,4 @@
-import styles from "../../../styles/Home.module.css";
+import styles from "../../../styles/Home.module.less";
 import { Row, Col, Form, Button, Checkbox as CheckControlled, Radio, Select } from "antd";
 import style from './style.module.less';
 import Checkbox from "src/components/Checkbox";
@@ -137,7 +137,7 @@ export default function OptionTab() {
                                 label="Drop Down 1"
                                 name="drop_down_example_2"
                             >
-                                <Select/>
+                                <Select placeholder="dropdown menu 1"/>
                             </Form.Item>
                         </Col>
                         <Col md={30} xs={30} style={{marginRight: '20px'}}>
@@ -145,7 +145,7 @@ export default function OptionTab() {
                                 label="Drop Down 2"
                                 name="drop_down_example_3"
                             >
-                                <Select disabled/>
+                                <Select disabled placeholder="dropdown menu 2"/>
                             </Form.Item>
                         </Col>
                         <Col md={30} xs={30} style={{marginRight: '20px'}}>
@@ -153,7 +153,7 @@ export default function OptionTab() {
                                 label="Drop Down 3"
                                 name="drop_down_example_4"
                             >
-                                <Select disabled/>
+                                <Select disabled placeholder="dropdown menu 3"/>
                             </Form.Item>
                         </Col>
                     </Row>
