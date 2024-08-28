@@ -4,7 +4,7 @@ export const sidebarMenu = [
     {
         label: 'Home',
         icon: <HomeOutlined/>,
-        key: "1",
+        key: "/",
     },
     {
         key: 'Example',
@@ -12,19 +12,19 @@ export const sidebarMenu = [
         label: 'Example',
         children: [
             {
-                key: '2',
+                key: '/Date',
                 label: 'Date',
             },
             {
-                key: '3',
+                key: '/Input',
                 label: 'Input',
             },
             {
-                key: '4',
+                key: '/Option',
                 label: 'Option',
             },
             {
-                key: '5',
+                key: '/View',
                 label: 'View',
             },
         ],

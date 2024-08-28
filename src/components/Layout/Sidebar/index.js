@@ -4,14 +4,20 @@ import classes from './style.module.less';
 import { sidebarMenu } from 'src/constants/sidebarMenu';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMenu } from '../../../redux/actions/sidebarMenu';
+import { useRouter } from 'next/router';
 
 const Sidebar = () => {
-	const dispatch = useDispatch();
-	//for change view
-	const stateMenuSidebar = useSelector((state) => state.setMenu);
-	const selectedKey = stateMenuSidebar.selectedKey;
+	// const dispatch = useDispatch();
+	// //for change view
+	// const stateMenuSidebar = useSelector((state) => state.setMenu);
+	// const selectedKey = stateMenuSidebar.selectedKey;
+	// const handleMenuClick = (e) => {
+	//   dispatch(setMenu(e.key))
+	// };
+
+	const router = useRouter()
 	const handleMenuClick = (e) => {
-	  dispatch(setMenu(e.key))
+	  router.push(e.key)
 	};
 
 	return (
@@ -36,7 +42,8 @@ const Sidebar = () => {
 						mode="inline"
 						items={sidebarMenu}
 						onClick={handleMenuClick}
-						selectedKeys={[selectedKey]}
+						// selectedKeys={[selectedKey]}
+						defaultSelectedKeys={[router.pathname]}
 						/>
 
 						{/* footer sidebar */}
